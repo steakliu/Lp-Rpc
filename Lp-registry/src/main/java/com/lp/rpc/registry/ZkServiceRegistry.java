@@ -6,7 +6,6 @@ import com.lp.rpc.constants.ZNodeType;
 import com.lp.rpc.server.LpServer;
 import com.lp.rpc.utils.IpUti;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,12 +28,16 @@ public class ZkServiceRegistry implements ApplicationContextAware, InitializingB
     /**
      * zk地址
      */
-    private String zkAddress;
+    private final String zkAddress;
     /**
      * 服务名称
      */
-    private String serviceName;
+    private final String serviceName;
 
+    /**
+     * 服务端口
+     */
+    private final int serverPort;
 
 
     /**
@@ -84,6 +86,6 @@ public class ZkServiceRegistry implements ApplicationContextAware, InitializingB
         List<String> list = ZkOperation.getChildren("/"+serviceName, true);
         logger.debug("服务列表：{}",list);
         LpServer lpServer = new LpServer();
-        lpServer.startServer(list);
+        lpServer.startServer(list,serverPort);
     }
 }

@@ -1,20 +1,22 @@
 package com.lp.rpc.server;
 
 import com.lp.rpc.domain.LpRequest;
+import com.lp.rpc.utils.LpStringUtil;
+import io.netty.util.internal.StringUtil;
 import org.reflections.Reflections;
 
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Set;
 
-public class LpServiceCall {
+public class LpServerCall {
 
     public static Object serviceCall(LpRequest lpRequest, List<String> serviceList) throws ClassNotFoundException {
 
         if (serviceList.size() < 1){
             System.out.println("无服务");
         }
-        int lastDot = lpRequest.getClassName().lastIndexOf(".") + 1;
+        int lastDot = LpStringUtil.getLastIndex(lpRequest.getClassName(),'.') + 1;
         //客户端传过来的接口名
         String clientInterfaceName = lpRequest.getClassName().substring(lastDot);
         String targetInterfaceName = "";

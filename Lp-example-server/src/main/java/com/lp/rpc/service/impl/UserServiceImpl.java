@@ -1,8 +1,8 @@
 package com.lp.rpc.service.impl;
 
 import com.lp.rpc.annotation.LpService;
-import com.lp.rpc.service.IUserService;
-
+import com.lp.rpc.bean.User;
+import com.lp.rpc.service.UserService;
 /**
  * TODO
  *
@@ -11,9 +11,10 @@ import com.lp.rpc.service.IUserService;
  * @date 2021/8/22 0022 21:29
  */
 @LpService
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements UserService {
+
     @Override
-    public String sayHello() {
-        return "你好";
+    public User getUser(User user) {
+        return user;
     }
 }

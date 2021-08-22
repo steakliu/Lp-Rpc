@@ -28,7 +28,7 @@ public class LpKryoDecoder extends ByteToMessageDecoder {
         }
         byte[] bytes = new byte[length];
         byteBuf.readBytes(bytes);
-        if (LpConstant.GalsangRpcMsgRequest == b){
+        if (LpConstant.LpRpcMsgRequest == b){
             LpRequest lpRequest = serializer.deserialize(bytes, LpRequest.class);
             list.add(lpRequest);
         }else {

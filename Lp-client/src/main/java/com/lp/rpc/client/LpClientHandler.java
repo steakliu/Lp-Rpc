@@ -7,26 +7,27 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class LpClientHandler extends ChannelInboundHandlerAdapter {
 
-    private Object galsangResponse;
+    private Object response;
 
-    public Object getGalsangResponse() {
-        return galsangResponse;
+    public Object getResponse() {
+        return response;
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         LpResult lpResult = (LpResult)msg;
         if (lpResult.getCode() == LpCode.SUCCESS){
-            galsangResponse = lpResult.getData();
+            response = lpResult.getData();
         }
         else {
-            galsangResponse = LpResult.fail(msg);
+            response = LpResult.fail(msg);
         }
         ctx.close();
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        ctx.close();
         super.exceptionCaught(ctx, cause);
     }
 }

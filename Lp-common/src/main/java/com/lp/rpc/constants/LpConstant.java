@@ -10,15 +10,15 @@ public interface LpConstant {
     /**
      * 消息为请求request
      */
-    public final byte GalsangRpcMsgRequest = 1;
+    public final byte LpRpcMsgRequest = 1;
 
     /**
      * 消息为相应response
      */
-    public final byte GalsangRpcMsgResponse = 2;
+    public final byte LpRpcMsgResponse = 2;
 
     /**
      * 服务端监听端口
      */
-    public final int CalsangPort = 999;
+    public final int LpPort = 999;
 }

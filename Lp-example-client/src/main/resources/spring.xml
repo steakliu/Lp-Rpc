@@ -13,10 +13,9 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
     <context:component-scan base-package="com.lp.rpc"></context:component-scan>
-    <context:property-placeholder location="zookeeper.properties"></context:property-placeholder>
-<!--    <bean id="zkServiceRegistry" class="com.lp.rpc.registry.ZkServiceRegistry">-->
-<!--        <constructor-arg name="zkAddress" value="${zookeeper.registry.address}"></constructor-arg>-->
-<!--    </bean>-->
-<!--    <bean id="lpClinetProxy" class="com.lp.rpc.client.LpClientProxy"></bean>-->
-<!--    <bean id="lpServer" class="com.lp.rpc.server.LpServer"></bean>-->
+    <context:property-placeholder location="application.properties"></context:property-placeholder>
+    <bean id="remoteProperties" class="com.lp.rpc.client.LpEnvInitializer">
+        <constructor-arg name="remoteAddress" value="${lp.remote.service.address}"></constructor-arg>
+        <constructor-arg name="remotePort" value="${lp.remote.service.port}"></constructor-arg>
+    </bean>
 </beans>

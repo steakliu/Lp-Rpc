@@ -17,15 +17,15 @@ public class LpKryoEncoder extends MessageToByteEncoder<LpMessage> {
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, LpMessage o, ByteBuf byteBuf) throws Exception {
         byte[] bytesBody;
-        if (o.getMessageType() == LpConstant.GalsangRpcMsgRequest){
+        if (o.getMessageType() == LpConstant.LpRpcMsgRequest){
             LpRequest lpRequest = (LpRequest)o.getData();
             bytesBody = serializer.serialize(lpRequest);
-            byteBuf.writeByte(LpConstant.GalsangRpcMsgRequest);
+            byteBuf.writeByte(LpConstant.LpRpcMsgRequest);
         }
         else {
             LpResult lpResult =  (LpResult)o.getData();
             bytesBody = serializer.serialize(lpResult);
-            byteBuf.writeByte(LpConstant.GalsangRpcMsgResponse);
+            byteBuf.writeByte(LpConstant.LpRpcMsgResponse);
         }
         int length = bytesBody.length ;
         byteBuf.writeInt(length);
