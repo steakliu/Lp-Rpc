@@ -3,6 +3,7 @@ package com.lp.rpc.registry;
 import com.lp.rpc.annotation.LpService;
 import com.lp.rpc.constants.LpConstant;
 import com.lp.rpc.constants.ZNodeType;
+import com.lp.rpc.registry.listener.ZkRegistryListener;
 import com.lp.rpc.server.LpServer;
 import com.lp.rpc.utils.IpUti;
 import lombok.AllArgsConstructor;
@@ -51,7 +52,6 @@ public class ZkServiceRegistry implements ApplicationContextAware, InitializingB
         logger.info("服务注册中");
         logger.info("服务注册地址:{}",zkAddress);
         for (Object bean : annotationMap.values()){
-            Map<String,Object> map = new HashMap<>();
             LpService annotation = bean.getClass().getAnnotation(LpService.class);
             Class<?>[] interfaces = bean.getClass().getInterfaces();
             for (Class<? extends Object> inter : interfaces){
@@ -87,5 +87,6 @@ public class ZkServiceRegistry implements ApplicationContextAware, InitializingB
         logger.debug("服务列表：{}",list);
         LpServer lpServer = new LpServer();
         lpServer.startServer(list,serverPort);
+        ZkRegistryListener zkRegistryListener = new ZkRegistryListener();
     }
 }

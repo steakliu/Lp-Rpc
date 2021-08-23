@@ -115,9 +115,8 @@ public class ZkOperation {
      * @param path
      * @param bytes
      * @param version
-     * @return
      */
-    public static Stat setData(String path , byte[] bytes , int version){
+    public static void setData(String path , byte[] bytes , int version){
         zkConnection = new ZkConnection();
         zk = zkConnection.connection();
         Stat stat = null;
@@ -126,7 +125,6 @@ public class ZkOperation {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return stat;
     }
 
     /**

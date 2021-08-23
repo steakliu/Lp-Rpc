@@ -11,9 +11,11 @@ public class ZkConnection {
     private static ZooKeeper zoo;
     final static CountDownLatch connectionSign = new CountDownLatch(1);
 
+    String ip = "116.198.160.39";
+    String addrs = ip + ":2181," + ip + ":2182," + ip + ":2183";
     public ZooKeeper connection(){
         try {
-            zoo = new ZooKeeper(LpConstant.ZkHost, LpConstant.zkTimeOut, new Watcher() {
+            zoo = new ZooKeeper(addrs, LpConstant.zkTimeOut, new Watcher() {
                 @Override
                 public void process(WatchedEvent watchedEvent) {
                     if (watchedEvent.getState() == Event.KeeperState.SyncConnected){

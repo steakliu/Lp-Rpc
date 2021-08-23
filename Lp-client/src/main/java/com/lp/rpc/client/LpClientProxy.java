@@ -7,6 +7,7 @@ import com.lp.rpc.domain.LpMessage;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -36,6 +37,7 @@ public class LpClientProxy{
                 try {
                     Bootstrap bootstrap = new Bootstrap();
                     bootstrap.group(group)
+                            .option(ChannelOption.SO_KEEPALIVE,true)
                             .channel(NioSocketChannel.class)
                             .handler(new ChannelInitializer<SocketChannel>() {
                                 @Override
